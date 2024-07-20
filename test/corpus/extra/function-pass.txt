@@ -10,9 +10,8 @@ end
 ---
 
 (source_file
-  (decl
-    (function_decl
-      (identifier)
-      (ty)
-      (subprogram_body
-        (stmt)))))
+  (function_decl
+    (identifier)
+    (ty)
+    (subprogram_body
+      (stmt))))

@@ -11,7 +11,7 @@ module.exports = grammar({
 
   rules: {
     // source_file: $ => $.program,
-    source_file: $ => repeat($.decl),
+    source_file: $ => repeat($._decl),
 
     // TODO: comment
     // TODO: literals
@@ -29,7 +29,7 @@ module.exports = grammar({
 
     // decl_list: $ => repeat($.decl),
 
-    decl: $ => choice(
+    _decl: $ => choice(
       // TODO: other decl
       $.function_decl,
     ),
