@@ -1,21 +1,27 @@
+const sep = (rule, separator) => optional(sep1(rule, separator))
+const sep1 = (rule, separator) => seq(rule, repeat(seq(separator, rule)))
+
 module.exports = grammar({
   name: 'asl',
 
   // adhere to the spec
   inline: $ => [
-    $.program,
-    $.decl_list,
-    $.stmt_list,
+    // rules that match empty string, must be manually inlined
+    // $.program,    // inlined
+    // $.decl_list,  // inlined
+    // $.stmt_list,  // inlined
     $.parameters_opt,
     $.parameter_list,
     $.formal_list,
+    $.constraint_opt,
     $.return_ty_opt,
     $.ty_opt,
-    $.stmt_list,
   ],
 
   rules: {
-    source_file: $ => $.program,
+    // matches empty string, must be inlined to start symbol
+    // source_file: $ => $.program,
+    source_file: $ => repeat($.decl),
 
     // TODO: comment
     // TODO: literals
@@ -26,15 +32,16 @@ module.exports = grammar({
     // TODO: identifier_trailing
     // TODO: identifier_trailing_list
 
-    program: $ => $.decl_list,
+    // matches empty string, must be inlined to start symbol
+    // program: $ => $.decl_list,
 
     // TODO: annotation
 
-    decl_list: $ => repeat($.decl),
+    // decl_list: $ => repeat($.decl),
 
     decl: $ => choice(
       // TODO: other decl
-      $.function_decl
+      $.function_decl,
     ),
 
     // TODO: type_decl
@@ -44,7 +51,7 @@ module.exports = grammar({
     subprogram_body: $ => seq(
       'begin',
       $.stmt_list,
-      'end'
+      'end',
     ),
 
     function_decl: $ => seq(
@@ -55,12 +62,12 @@ module.exports = grammar({
       $.formal_list,
       ')',
       $.return_ty_opt,
-      $.subprogram_body
+      $.subprogram_body,
     ),
 
     return_ty_opt: $ => optional(seq(
       '=>',
-      $.ty
+      $.ty,
     )),
 
     // TODO: args_opt
@@ -69,8 +76,8 @@ module.exports = grammar({
 
     parameters_opt: $ => optional(seq(
       '{',
-      parameter_list,
-      '}'
+      $.parameter_list,
+      '}',
     )),
 
     parameter: $ => seq(
@@ -93,23 +100,34 @@ module.exports = grammar({
     ty: $ => choice(
       $.identifier,
       'boolean',
-      seq('integer', optional($.constraint)),
+      seq('integer', $.constraint_opt),
       // TODO: other tys
-      'real'
+      'real',
     ),
 
-    // TODO: constraint_opt
+    constraint_opt: $ => optional($.constraint),
+
     // TODO: bitfields_opt
     // TODO: fields_opt
     // TODO: with_opt
     // TODO: bitwidth
-    // TODO: constraint
-    // TODO: constraint_range
-    // TODO: constraint_range_list
+
+    constraint: $ => seq(
+      '{',
+      $.constraint_range_list,
+      '}',
+    ),
+
+    constraint_range: $ => choice(
+      $.expr,
+      seq($.expr, '..', $.expr),
+    ),
+
+    constraint_range_list: $ => sep1($.constraint_range, ','),
 
     ty_opt: $ => optional(seq(
       ':',
-      $.ty
+      $.ty,
     )),
 
     // TODO: ty_list
@@ -148,14 +166,40 @@ module.exports = grammar({
     // TODO: expr_list
     // TODO: null_or_expr
     // TODO: null_or_expr_list
-    // TODO: expr
+
+    expr: $ => choice(
+      // TODO: if then else expr
+      $.cexpr,
+    ),
+
     // TODO: elsif_expr
     // TODO: elsif_expr_list
-    // TODO: cexpr
-    // TODO: cexpr_cmp
-    // TODO: cexpr_add_sub
-    // TODO: cexpr_mul_div
-    // TODO: cexpr_pow
+
+    cexpr: $ => choice(
+      // TODO: other cexpr
+      $.cexpr_cmp,
+    ),
+
+    cexpr_cmp: $ => choice(
+      // TODO: binop_comparison
+      $.cexpr_add_sub,
+    ),
+
+    cexpr_add_sub: $ => choice(
+      // TODO: binop_add_sub_logic
+      $.cexpr_mul_div,
+    ),
+
+    cexpr_mul_div: $ => choice(
+      // TODO: binop_mul_div_shift
+      $.cexpr_pow,
+    ),
+
+    cexpr_pow: $ => choice(
+      // TODO: cexpr_pow
+      $.bexpr,
+    ),
+
     // TODO: binop_boolean
     // TODO: binop_comparison
     // TODO: binop_add_sub_logic
@@ -163,8 +207,19 @@ module.exports = grammar({
     // TODO: binop_pow
     // TODO: unop
     // TODO: binop_in
-    // TODO: bexpr
-    // TODO: expr_term
+
+    bexpr: $ => choice(
+      // TODO: unop
+      $.expr_term,
+    ),
+
+    expr_term: $ => choice(
+      // TODO: other expr_term
+      'UNKNOWN',
+      ':',
+      $.ty,
+    ),
+
     // TODO: expr_atom
     // TODO: field_assignment
     // TODO: field_assignment_list
