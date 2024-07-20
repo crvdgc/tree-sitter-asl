@@ -4,22 +4,12 @@ const sep1 = (rule, separator) => seq(rule, repeat(seq(separator, rule)))
 module.exports = grammar({
   name: 'asl',
 
-  // adhere to the spec
-  inline: $ => [
-    // rules that match empty string, must be manually inlined
-    // $.program,    // inlined
-    // $.decl_list,  // inlined
-    // $.stmt_list,  // inlined
-    $.parameters_opt,
-    $.parameter_list,
-    $.formal_list,
-    $.constraint_opt,
-    $.return_ty_opt,
-    $.ty_opt,
-  ],
+  // syntax rules cannot match empty string (except the start rule)
+  // Such rules must be manually inlined (`inlined` list doesn't handle this
+  // yet).
+  // Generally this means `_opt` and `_list` non-terminals.
 
   rules: {
-    // matches empty string, must be inlined to start symbol
     // source_file: $ => $.program,
     source_file: $ => repeat($.decl),
 
@@ -50,44 +40,66 @@ module.exports = grammar({
 
     subprogram_body: $ => seq(
       'begin',
-      $.stmt_list,
+      // $.stmt_list,
+      repeat($.stmt),
       'end',
     ),
 
     function_decl: $ => seq(
       'func',
       $.identifier,
-      $.parameters_opt,
+
+      // $.parameters_opt,
+      optional(seq(
+        '{',
+        // $.parameter_list,
+        optional(
+          sep($.parameter, ','),
+        ),
+        '}',
+      )),
+
       '(',
-      $.formal_list,
+      // $.formal_list,
+      sep($.formal, ','),
       ')',
-      $.return_ty_opt,
+
+      // $.return_ty_opt,
+      optional(seq(
+        '=>',
+        $.ty,
+      )),
+
       $.subprogram_body,
     ),
 
-    return_ty_opt: $ => optional(seq(
-      '=>',
-      $.ty,
-    )),
+    // return_ty_opt: $ => optional(seq(
+    //   '=>',
+    //   $.ty,
+    // )),
 
     // TODO: args_opt
     // TODO: getter_decl
     // TODO: setter_decl
 
-    parameters_opt: $ => optional(seq(
-      '{',
-      $.parameter_list,
-      '}',
-    )),
+    // parameters_opt: $ => optional(seq(
+    //   '{',
+    //   $.parameter_list,
+    //   '}',
+    // )),
 
     parameter: $ => seq(
       $.identifier,
-      $.ty_opt,
+      // $.ty_opt,
+      optional(seq(
+        ':',
+        $.ty,
+      )),
     ),
 
-    parameter_list: $ => optional(
-      sep($.parameter, ','),
-    ),
+    // parameter_list: $ => optional(
+    //   sep($.parameter, ','),
+    // ),
 
     formal: $ => seq(
       $.identifier,
@@ -95,17 +107,21 @@ module.exports = grammar({
       $.ty,
     ),
 
-    formal_list: $ => sep($.formal, ','),
+    // formal_list: $ => sep($.formal, ','),
 
     ty: $ => choice(
       $.identifier,
       'boolean',
-      seq('integer', $.constraint_opt),
+      seq(
+        'integer',
+        // $.constraint_opt
+        optional($.constraint),
+      ),
       // TODO: other tys
       'real',
     ),
 
-    constraint_opt: $ => optional($.constraint),
+    // constraint_opt: $ => optional($.constraint),
 
     // TODO: bitfields_opt
     // TODO: fields_opt
@@ -125,10 +141,10 @@ module.exports = grammar({
 
     constraint_range_list: $ => sep1($.constraint_range, ','),
 
-    ty_opt: $ => optional(seq(
-      ':',
-      $.ty,
-    )),
+    // ty_opt: $ => optional(seq(
+    //   ':',
+    //   $.ty,
+    // )),
 
     // TODO: ty_list
     // TODO: bitfield_spec
@@ -140,7 +156,7 @@ module.exports = grammar({
       // TODO: other stmts
     ),
 
-    stmt_list: $ => repeat($.stmt),
+    // stmt_list: $ => repeat($.stmt),
 
     // TODO: decl_stmt
     // TODO: decl_item
