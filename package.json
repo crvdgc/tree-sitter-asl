@@ -1,0 +1,24 @@
+{
+  "name": "tree-sitter-asl",
+  "version": "0.0.1",
+  "description": "unofficial experimental parsers for the Architecture Specification Language",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "keywords": [
+    "tree-sitter"
+  ],
+  "author": "crvdgc <ubikium@gmail.com>",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "nan": "^2.20.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.22.6"
+  }
+}
