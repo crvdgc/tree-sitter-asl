@@ -1,0 +1,18 @@
+=====
+Function with pass as its body
+=====
+
+func main() => integer
+begin
+  pass;
+end
+
+---
+
+(source_file
+  (decl
+    (function_decl
+      (identifier)
+      (ty)
+      (subprogram_body
+        (stmt)))))

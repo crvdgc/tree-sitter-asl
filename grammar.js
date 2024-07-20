@@ -152,7 +152,7 @@ module.exports = grammar({
     // TODO: bitfield_list
 
     stmt: $ => choice(
-      'pass',
+      seq('pass', ';'),
       // TODO: other stmts
     ),
 
