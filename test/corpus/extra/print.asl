@@ -1,10 +1,10 @@
 =====
-Function with pass as its body
+Print statement
 =====
 
 func f()
 begin
-  pass;
+  print(x);
 end
 
 ---
@@ -13,4 +13,5 @@ end
   (function_decl
     (identifier)
     (subprogram_body
-      (stmt))))
+      (stmt
+        (identifier)))))
