@@ -14,4 +14,5 @@ end
     (identifier)
     (subprogram_body
       (stmt
+        (identifier)
         (identifier)))))

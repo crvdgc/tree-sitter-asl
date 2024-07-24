@@ -6,7 +6,12 @@ module.exports = grammar({
 
   extras: $ => [
     /\s/,  // does indent level actually change parsing?
+           // maybe should be moved to externals
     $._comment,
+  ],
+
+  conflicts: $ => [
+    [$._expr_atom],
   ],
 
   // syntax rules cannot match empty string (except the start rule)
@@ -27,6 +32,11 @@ module.exports = grammar({
       )
     )),
 
+    boolean_lit: $ => choice(
+      'TRUE',
+      'FALSE',
+    ),
+
     int_lit: $ => /[0-9][0-9_]*/,
 
     // TODO: hex_lit
@@ -44,7 +54,8 @@ module.exports = grammar({
 
     identifier: $ => /[a-zA-Z_][a-zA-Z_0-9]*/,
 
-    // TODO: identifier_list
+    // identifier_list: $ => sep1($.identifier, ','),
+
     // TODO: identifier_trailing
     // TODO: identifier_trailing_list
 
@@ -66,8 +77,7 @@ module.exports = grammar({
 
     subprogram_body: $ => seq(
       'begin',
-      // $.stmt_list,
-      repeat($.stmt),
+      $._stmt_list,
       'end',
     ),
 
@@ -178,36 +188,180 @@ module.exports = grammar({
     // TODO: bitfield_list
 
     stmt: $ => choice(
+      // TODO: annotation stmt
+      $.decl_stmt,
+      seq(
+        $._l_expr,
+        '=',
+        $._expr
+      ),
+      // "print" statement is also parsed as a func call
+      seq(
+        $.identifier,
+        '(',
+        // $.null_or_expr_list
+        sep($._expr, ','),
+        ')',
+        ';',
+      ),
       seq(
         'return',
         // $._expr_opt
         optional($._expr),
         ';',
       ),
-      seq('pass', ';'),
-      // TODO: other stmts
-      // extra
       seq(
-        'print',
-        '(',
-        sep($._expr, ','),
-        ')',
-        ';',
+        'assert',
+        $._expr,
+        ';'
+      ),
+      seq(
+        'throw',
+        // $.expr_opt
+        optional($._expr),
+        ';'
+      ),
+      seq('pass', ';'),
+      seq(
+        'if',
+        $._expr,
+        'then',
+        $._stmt_list,
+        // $.elsif_list
+        repeat($.elsif),
+        // $.else_opt
+        optional(seq('else', $._stmt_list)),
+        'end',
       )
+      // TODO: other stmts
     ),
 
-    // stmt_list: $ => repeat($.stmt),
+    _stmt_list: $ => seq($.stmt, repeat($.stmt)),
 
-    // TODO: decl_stmt
-    // TODO: decl_item
+    decl_stmt: $ => choice(
+      seq(
+        'var',
+        $.identifier,
+        ':',
+        $.ty,
+        ';'
+      ),
+      seq(
+        'var',
+        // $.identifier,
+        // ',',
+        // $.identifier_list
+        sep1($.identifier, ','),
+        ':',
+        $.ty,
+        ';'
+      ),
+      seq(
+        'var',
+        $._decl_item,
+        '=',
+        $._expr,
+        ';',
+      ),
+      seq(
+        'let',
+        $._decl_item,
+        '=',
+        $._expr,
+        ';',
+      ),
+      seq(
+        'constant',
+        $._decl_item,
+        '=',
+        $._expr,
+        ';',
+      ),
+    ),
+
+    _decl_item: $ => choice(
+      seq(
+        $.identifier,
+        // $.ty_opt
+        optional($.ty),
+      ),
+      seq(
+        '(',
+        // $.decl_item_list
+        sep1($._decl_item, ','),
+        ')',
+        // $.ty_opt
+        optional($.ty),
+      ),
+      seq(
+        '[',
+        // $.decl_item_list
+        sep1($._decl_item, ','),
+        ']',
+        // $.ty_opt
+        optional($.ty),
+      ),
+      seq(
+        '-',
+        // $.ty_opt
+        optional($.ty),
+      ),
+    ),
+
     // TODO: decl_item_list
-    // TODO: l_expr
-    // TODO: l_expr_list
-    // TODO: l_expr_atom
-    // TODO: l_expr_atom_list
-    // TODO: elsif
-    // TODO: elsif_list
-    // TODO: else_opt
+
+    _l_expr: $ => choice(
+      '-',
+      $._l_expr_atom,
+      seq(
+        '(',
+        // $._l_expr_list
+        sep1($._l_expr, ','),
+        ')',
+      ),
+    ),
+
+    // _l_expr_list: $ => sep1($._l_expr, ','),
+
+    _l_expr_atom: $ => choice(
+      $.identifier,
+      seq($._l_expr_atom, '.', $.identifier),
+      seq(
+        $._l_expr_atom,
+        '.',
+        '[',
+        // $.identifier_list
+        sep1($.identifier, ','),
+        ']',
+        ),
+      seq(
+        '[',
+        // $._l_expr_atom_list
+        sep1($._l_expr_atom, ','),
+        ']',
+      ),
+      seq(
+        $._l_expr_atom,
+        '[',
+        // $.null_or_slice_list
+        sep($.slice, ','),
+        ']',
+      ),
+    ),
+
+    // _l_expr_atom_list: sep1($._l_expr_atom, ','),
+
+    elsif: $ => seq(
+      'elsif',
+      $._expr,
+      'then',
+      $._stmt_list,
+    ),
+
+    // elsif_list: $ => repeat($.elsif)
+
+    // $.else_opt = $ => optional(seq('else', $._stmt_list)),
+
     // TODO: alt
     // TODO: where_opt
     // TODO: alt_list
@@ -298,14 +452,25 @@ module.exports = grammar({
     // TODO: field_assignment
     // TODO: field_assignment_list
     // TODO: checked_type_constraint
-    // TODO: slice
-    // TODO: slice_list
-    // TODO: null_or_slice
-    // TODO: null_or_slice_list
+
+    slice: $ => choice(
+      $._expr,
+      seq($._expr, ':', $._expr),
+      seq($._expr, '+:', $._expr),
+      seq($._expr, '*:', $._expr),
+    ),
+
+    // slice_list: $ => seq(sep1($.slice, ','), optional(',')),
+
+    // null_or_slice: $ => $.slice,
+
+    // null_or_slice_list: $ => sep($.null_or_slice, ','),
+
     _literal_expr: $ => choice(
       $.int_lit,
       $.string_lit,
       // TODO: other literal_expr
+      $.boolean_lit,
     ),
   }
 });

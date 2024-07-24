@@ -16,6 +16,7 @@ end
     (ty)
     (subprogram_body
       (stmt
+        (identifier)
         (string_lit))
       (stmt
         (int_lit)))))
