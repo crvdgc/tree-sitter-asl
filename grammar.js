@@ -7,7 +7,7 @@ module.exports = grammar({
   extras: $ => [
     /\s/,  // does indent level actually change parsing?
            // maybe should be moved to externals
-    $._comment,
+    $.comment,
   ],
 
   conflicts: $ => [
@@ -23,7 +23,7 @@ module.exports = grammar({
     // source_file: $ => $.program,
     source_file: $ => repeat($._decl),
 
-    _comment: $ => token(choice(
+    comment: $ => token(choice(
       seq('//', /[^\n]*/),
       seq(
         '/*',

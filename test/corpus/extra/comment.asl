@@ -15,9 +15,11 @@ end
 ---
 
 (source_file
+  (comment)
   (function_decl
     (identifier)
     (subprogram_body
+      (comment)
       (stmt
         (identifier)
         (identifier)))))
