@@ -17,6 +17,7 @@
   "let"
   "var"
   "constant"
+  "assert"
 ] @keyword
 
 (ty) @type
