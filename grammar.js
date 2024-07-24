@@ -4,6 +4,11 @@ const sep1 = (rule, separator) => seq(rule, repeat(seq(separator, rule)))
 module.exports = grammar({
   name: 'asl',
 
+  extras: $ => [
+    /\s/,  // does indent level actually change parsing?
+    $._comment,
+  ],
+
   // syntax rules cannot match empty string (except the start rule)
   // Such rules must be manually inlined (`inlined` list doesn't handle this
   // yet).
@@ -13,7 +18,14 @@ module.exports = grammar({
     // source_file: $ => $.program,
     source_file: $ => repeat($._decl),
 
-    // TODO: comment
+    _comment: $ => token(choice(
+      seq('//', /[^\n]*/),
+      seq(
+        '/*',
+        /([^*]|\*[^\/])*/,
+        '*/',
+      )
+    )),
 
     int_lit: $ => /[0-9][0-9_]*/,
 
