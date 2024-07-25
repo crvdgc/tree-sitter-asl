@@ -1,5 +1,6 @@
 const sep = (rule, separator) => optional(sep1(rule, separator))
 const sep1 = (rule, separator) => seq(rule, repeat(seq(separator, rule)))
+const sep1_tr = (rule, separator) => seq(sep1(rule, separator), optional(separator))
 
 module.exports = grammar({
   name: 'asl',
@@ -56,8 +57,9 @@ module.exports = grammar({
 
     // identifier_list: $ => sep1($.identifier, ','),
 
-    // TODO: identifier_trailing
-    // TODO: identifier_trailing_list
+    // identifier_trailing: $ => $.identifier,
+
+    identifier_trailing_list: $ => sep1_tr($.identifier, ','),
 
     // matches empty string, must be inlined to start symbol
     // program: $ => $.decl_list,
@@ -218,7 +220,46 @@ module.exports = grammar({
           '}',
         )),
       ),
-      // TODO: other tys
+      seq(
+        'enumeration',
+        '{',
+        $.identifier_trailing_list,
+        '}',
+      ),
+      seq(
+        '(',
+        // $.ty_list,
+        sep($.ty, ','),
+        ')',
+      ),
+      seq(
+        'array',
+        '[',
+        $._expr,
+        ']',
+        'of',
+        $.ty,
+      ),
+      seq(
+        'record',
+        // $.fields_opt
+        optional(seq(
+          '{',
+          // $.field_list,
+          sep($.field, ','),
+          '}',
+        )),
+      ),
+      seq(
+        'exception',
+        // $.fields_opt
+        optional(seq(
+          '{',
+          // $.field_list,
+          sep($.field, ','),
+          '}',
+        )),
+      ),
     ),
 
     // constraint_opt: $ => optional($.constraint),
@@ -271,7 +312,7 @@ module.exports = grammar({
     //   $.ty,
     // )),
 
-    // TODO: ty_list
+    // ty_list: $ => sep($.ty, ','),
 
     bitfield_spec: $ => choice(
       seq(':', $.ty),
@@ -287,7 +328,7 @@ module.exports = grammar({
     bitfield: $ => seq(
       '[',
       // $.slice_list,
-      seq(sep1($.slice, ','), optional(',')),
+      sep1_tr($.slice, ','),
       ']',
       $.identifier,
       // $.bitfield_spec,
@@ -578,7 +619,7 @@ module.exports = grammar({
       seq($._expr, '*:', $._expr),
     ),
 
-    // slice_list: $ => seq(sep1($.slice, ','), optional(',')),
+    // slice_list: $ => sep1_tr($.slice, ','),
 
     // null_or_slice: $ => $.slice,
 
