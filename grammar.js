@@ -229,7 +229,8 @@ module.exports = grammar({
       seq(
         'enumeration',
         '{',
-        $._identifier_trailing_list,
+        // $._identifier_trailing_list,
+    sep1_tr($.identifier, ','),
         '}',
       ),
       seq(
@@ -477,7 +478,7 @@ module.exports = grammar({
 
     _l_expr: $ => choice(
       '-',
-      $._lexpr_atom,
+      $.lexpr_atom,
       seq(
         '(',
         // $._l_expr_list
@@ -488,11 +489,11 @@ module.exports = grammar({
 
     // _l_expr_list: $ => sep1($._l_expr, ','),
 
-    _lexpr_atom: $ => choice(
+    lexpr_atom: $ => choice(
       $.identifier,
-      seq($._lexpr_atom, '.', $.identifier),
+      seq($.lexpr_atom, '.', $.identifier),
       seq(
-        $._lexpr_atom,
+        $.lexpr_atom,
         '.',
         '[',
         // $.identifier_list
@@ -501,12 +502,12 @@ module.exports = grammar({
         ),
       seq(
         '[',
-        // $._lexpr_atom_list
-        sep1($._lexpr_atom, ','),
+        // $.lexpr_atom_list
+        sep1($.lexpr_atom, ','),
         ']',
       ),
       seq(
-        $._lexpr_atom,
+        $.lexpr_atom,
         '[',
         // $.null_or_slice_list
         sep($.slice, ','),
@@ -514,7 +515,7 @@ module.exports = grammar({
       ),
     ),
 
-    // _lexpr_atom_list: sep1($._lexpr_atom, ','),
+    // lexpr_atom_list: sep1($.lexpr_atom, ','),
 
     elsif: $ => seq(
       'elsif',

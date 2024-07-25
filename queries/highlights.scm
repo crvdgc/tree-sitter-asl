@@ -1,7 +1,16 @@
 (identifier) @variable
 
+; Type identifiers
 (type_decl (identifier) @type)
 (expr_atom (identifier) @type "{")
+
+; Constants
+(type_decl (ty "enumeration" (identifier) @constant))
+(ty "enumeration" (identifier) @constant)
+(field (identifier) @constant)
+(field_assignment (identifier) @constant)
+
+; Function
 
 (function_decl
   (identifier) @function)
