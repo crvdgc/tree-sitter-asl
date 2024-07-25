@@ -62,17 +62,66 @@ module.exports = grammar({
     // matches empty string, must be inlined to start symbol
     // program: $ => $.decl_list,
 
-    // TODO: annotation
+    annotation: $ => seq(
+      '@',
+      $.identifier,
+      '(',
+      // $.null_or_expr_list
+      sep($._expr, ','),
+      ')',
+    ),
 
     // decl_list: $ => repeat($.decl),
 
     _decl: $ => choice(
-      // TODO: other decl
+      seq($.annotation, $._decl),
       $.function_decl,
+      $.type_decl,
+      // TODO: other decl
     ),
 
-    // TODO: type_decl
-    // TODO: field, field_list
+    type_decl: $ => choice(
+      seq(
+        'type',
+        $.identifier,
+        'of',
+        $.ty,
+        'subtypes',
+        $.ty,
+        ';',
+      ),
+      seq(
+        'type',
+        $.identifier,
+        'of',
+        $.ty,
+        ';',
+      ),
+      seq(
+        'type',
+        $.identifier,
+        'of',
+        $.ty,
+        'subtypes',
+        $.ty,
+        // $.with_opt
+        // NOTE: the empty 'with' case is subsumed
+        'with',
+        // $.fields_opt
+        optional(seq(
+          '{',
+          // $.field_list,
+          sep($.field, ','),
+          '}',
+        )),
+        ';',
+      ),
+    ),
+
+    field: $ => seq($.identifier, ':', $.ty),
+
+    // field_list: $ => sep($.field, ','),
+
     // TODO: storage_decl
 
     subprogram_body: $ => seq(
@@ -153,16 +202,56 @@ module.exports = grammar({
         // $.constraint_opt
         optional($.constraint),
       ),
-      // TODO: other tys
       'real',
+      'string',
+      'bit',
+      seq(
+        'bits',
+        '(',
+        $.bitwidth,
+        ')',
+        // $.bitfields_opt
+        optional(seq(
+          '{',
+          // $.bitfield_list
+          sep($.bitfield, ','),
+          '}',
+        )),
+      ),
+      // TODO: other tys
     ),
 
     // constraint_opt: $ => optional($.constraint),
 
-    // TODO: bitfields_opt
-    // TODO: fields_opt
-    // TODO: with_opt
-    // TODO: bitwidth
+    // bitfields_opt: $ => optional(seq(
+    //   '{',
+    //   // $.bitfield_list
+    //   sep($.bitfield, ','),
+    //   '}',
+    // )),
+
+    // fields_opt: $ => optional(seq(
+    //   '{',
+    //   $.field_list,
+    //   '}',
+    // )),
+
+    with_opt: $ => seq(
+        'with',
+        // $.fields_opt
+        optional(seq(
+          '{',
+          // $.field_list,
+          sep($.field, ','),
+          '}',
+        )),
+    ),
+
+    bitwidth: $ => choice(
+      $._expr,
+      seq('-', ':', $.ty),
+      $.constraint
+    ),
 
     constraint: $ => seq(
       '{',
@@ -183,9 +272,38 @@ module.exports = grammar({
     // )),
 
     // TODO: ty_list
-    // TODO: bitfield_spec
-    // TODO: bitfield
-    // TODO: bitfield_list
+
+    bitfield_spec: $ => choice(
+      seq(':', $.ty),
+      // $.bitfields_opt
+      optional(seq(
+        '{',
+        // $.bitfield_list
+        sep($.bitfield, ','),
+        '}',
+      )),
+    ),
+
+    bitfield: $ => seq(
+      '[',
+      // $.slice_list,
+      seq(sep1($.slice, ','), optional(',')),
+      ']',
+      $.identifier,
+      // $.bitfield_spec,
+      choice(
+        seq(':', $.ty),
+        // $.bitfields_opt
+        optional(seq(
+          '{',
+          // $.bitfield_list
+          sep($.bitfield, ','),
+          '}',
+        )),
+      ),
+    ),
+
+    // bitfield_list: $ => sep($.bitfield, ','),
 
     stmt: $ => choice(
       // TODO: annotation stmt
