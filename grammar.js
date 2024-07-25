@@ -568,39 +568,59 @@ module.exports = grammar({
 
     _expr: $ => choice(
       // TODO: if then else expr
-      $._c_expr,
+      $._cexpr,
     ),
 
     // TODO: elsif_expr
     // TODO: elsif_expr_list
 
-    _c_expr: $ => prec.left(choice(
-      // TODO: other _c_expr
-      $._c_expr_cmp,
+    _cexpr: $ => prec.left(choice(
+      seq(
+        $._cexpr,
+        $.binop_boolean,
+        $._cexpr_cmp
+      ),
+      seq(
+        $._cexpr,
+        $._checked_type_constraint,
+      ),
+      $._cexpr_cmp,
     )),
 
-    _c_expr_cmp: $ => choice(
+    _cexpr_cmp: $ => prec.left(choice(
       seq(
-        $._c_expr_cmp,
+        $._cexpr_cmp,
         $.binop_comparison,
-        $._c_expr_add_sub,
+        $._cexpr_add_sub,
       ),
-      $._c_expr_add_sub,
+      $._cexpr_add_sub,
+    )),
+
+    _cexpr_add_sub: $ => choice(
+      seq(
+        $._cexpr_add_sub,
+        $.binop_add_sub_logic,
+        $._cexpr_mul_div,
+      ),
+      $._cexpr_mul_div,
     ),
 
-    _c_expr_add_sub: $ => choice(
-      // TODO: binop_add_sub_logic
-      $._c_expr_mul_div,
+    _cexpr_mul_div: $ => choice(
+      seq(
+        $._cexpr_mul_div,
+        $.binop_mul_div_shift,
+        $._cexpr_pow,
+      ),
+      $._cexpr_pow,
     ),
 
-    _c_expr_mul_div: $ => choice(
-      // TODO: binop_mul_div_shift
-      $._c_expr_pow,
-    ),
-
-    _c_expr_pow: $ => choice(
-      // TODO: _c_expr_pow
-      $._b_expr,
+    _cexpr_pow: $ => choice(
+      seq(
+        $._cexpr_pow,
+        $.binop_pow,
+        $._bexpr,
+      ),
+      $._bexpr,
     ),
 
     binop_boolean: $ => choice(
@@ -619,14 +639,36 @@ module.exports = grammar({
       '<=',
     ),
 
-    // TODO: binop_add_sub_logic
-    // TODO: binop_mul_div_shift
-    // TODO: binop_pow
-    // TODO: unop
-    // TODO: binop_in
+    binop_add_sub_logic: $ => choice(
+      '+',
+      '-',
+      'OR',
+      'XOR',
+      'AND',
+    ),
 
-    _b_expr: $ => choice(
-      // TODO: unop
+    binop_mul_div_shift: $ => choice(
+      '*',
+      '/',
+      'DIV',
+      'DIVRM',
+      'MOD',
+      '<<',
+      '>>',
+    ),
+
+    binop_pow: $ => '^',
+
+    unop: $ => choice(
+      '-',
+      '!',
+      'NOT',
+    ),
+
+    // binop_in: 'IN',
+
+    _bexpr: $ => choice(
+      seq($.unop, $._bexpr),
       $._expr_term,
     ),
 
@@ -695,7 +737,10 @@ module.exports = grammar({
 
     // field_assignment_list: $ => sep($.field_assignment, ','),
 
-    // TODO: checked_type_constraint
+    _checked_type_constraint: $ => choice(
+      seq('as', $.ty),
+      seq('as', $.constraint),
+    ),
 
     slice: $ => choice(
       $._expr,

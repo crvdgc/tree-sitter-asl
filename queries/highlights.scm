@@ -76,18 +76,12 @@
 ; Operators
 
 [
-"="
-"=>"
-"&&"
-"||"
-"-->"
-"<->"
-"=="
-"!="
-">"
-">="
-"<"
-"<="
+ (binop_boolean)
+ (binop_comparison)
+ (binop_add_sub_logic)
+ (binop_mul_div_shift)
+ (binop_pow)
+ (unop)
 ] @operator
 
 [
