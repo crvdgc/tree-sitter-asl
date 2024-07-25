@@ -1,5 +1,5 @@
 =====
-Print statement
+print statement
 =====
 
 func f()

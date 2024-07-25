@@ -345,7 +345,7 @@ module.exports = grammar({
 
     constraint: $ => seq(
       '{',
-      $.constraint_range_list,
+      $._constraint_range_list,
       '}',
     ),
 
@@ -354,7 +354,7 @@ module.exports = grammar({
       seq($._expr, '..', $._expr),
     ),
 
-    constraint_range_list: $ => sep1($.constraint_range, ','),
+    _constraint_range_list: $ => sep1($.constraint_range, ','),
 
     // ty_opt: $ => optional(seq(':', $.ty)),
 
@@ -398,7 +398,8 @@ module.exports = grammar({
       seq(
         $._l_expr,
         '=',
-        $._expr
+        $._expr,
+        ';',
       ),
       // "print" statement is also parsed as a func call
       seq(
@@ -437,7 +438,16 @@ module.exports = grammar({
         // $.else_opt
         optional(seq('else', $._stmt_list)),
         'end',
-      )
+      ),
+      // TODO: case stmt
+      // TODO: for stmt
+      seq(
+        'while',
+        $._expr,
+        'do',
+        $._stmt_list,
+        'end',
+      ),
       // TODO: other stmts
     ),
 
