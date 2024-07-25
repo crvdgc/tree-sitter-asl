@@ -11,6 +11,10 @@ module.exports = grammar({
     $.comment,
   ],
 
+  precedences: $ => [
+    [$._expr_atom, $._expr_term],
+  ],
+
   conflicts: $ => [
     [$._expr_atom],
   ],
@@ -50,7 +54,8 @@ module.exports = grammar({
     ),
 
     // TODO: bitvector_lit
-    // TODO: bitmask_lit
+
+    bitmask_lit: $ => /\'[01x ]*\'/,
 
 
     identifier: $ => /[a-zA-Z_][a-zA-Z_0-9]*/,
@@ -59,7 +64,7 @@ module.exports = grammar({
 
     // identifier_trailing: $ => $.identifier,
 
-    identifier_trailing_list: $ => sep1_tr($.identifier, ','),
+    _identifier_trailing_list: $ => sep1_tr($.identifier, ','),
 
     // matches empty string, must be inlined to start symbol
     // program: $ => $.decl_list,
@@ -223,7 +228,7 @@ module.exports = grammar({
       seq(
         'enumeration',
         '{',
-        $.identifier_trailing_list,
+        $._identifier_trailing_list,
         '}',
       ),
       seq(
@@ -407,8 +412,8 @@ module.exports = grammar({
       ),
       seq(
         'var',
-        // $.identifier,
-        // ',',
+        $.identifier,
+        ',',
         // $.identifier_list
         sep1($.identifier, ','),
         ':',
@@ -525,14 +530,41 @@ module.exports = grammar({
     // TODO: where_opt
     // TODO: alt_list
     // TODO: otherwise_opt
-    // TODO: pattern
-    // TODO: pattern_set
-    // TODO: pattern_list
+
+    pattern: $ => choice(
+      '-',
+      $._expr,
+      seq($._expr, '..', $._expr),
+      seq('<=', $._expr),
+      seq('>=', $._expr),
+      $.pattern_set,
+    ),
+
+    pattern_set: $ => choice(
+      seq(
+        '{',
+        // $.pattern_list,
+        sep1($.pattern, ','),
+        '}',
+      ),
+      seq(
+        '!',
+        '{',
+        // $.pattern_list,
+        sep1($.pattern, ','),
+        '}',
+      ),
+      $.bitmask_lit,
+    ),
+
+    // pattern_list: $ => sep1($.pattern, ','),
+
     // TODO: direction
     // TODO: catcher
     // TODO: catcher_list
     // TODO: expr_opt
-    // TODO: expr_list
+
+    // expr_list: $ => sep($._expr, ','),
 
     // null_or_expr: $ => $._expr,
 
@@ -546,13 +578,17 @@ module.exports = grammar({
     // TODO: elsif_expr
     // TODO: elsif_expr_list
 
-    _c_expr: $ => choice(
+    _c_expr: $ => prec.left(choice(
       // TODO: other _c_expr
       $._c_expr_cmp,
-    ),
+    )),
 
     _c_expr_cmp: $ => choice(
-      // TODO: binop_comparison
+      seq(
+        $._c_expr_cmp,
+        $.binop_comparison,
+        $._c_expr_add_sub,
+      ),
       $._c_expr_add_sub,
     ),
 
@@ -571,8 +607,22 @@ module.exports = grammar({
       $._b_expr,
     ),
 
-    // TODO: binop_boolean
-    // TODO: binop_comparison
+    binop_boolean: $ => choice(
+      '&&',
+      '||',
+      '-->',
+      '<->',
+    ),
+
+    binop_comparison: $ => choice(
+      '==',
+      '!=',
+      '>',
+      '>=',
+      '<',
+      '<=',
+    ),
+
     // TODO: binop_add_sub_logic
     // TODO: binop_mul_div_shift
     // TODO: binop_pow
@@ -603,13 +653,50 @@ module.exports = grammar({
         sep($._expr, ','),
         ')',
       ),
-      // TODO: field_assignment_list
+      seq(
+        $.identifier,
+        // $.field_assignment_list,
+        sep($.field_assignment, ','),
+      ),
       $._literal_expr,
-      // TODO: other expr atom
+      seq(
+        $._expr_atom,
+        '[',
+        // $.null_or_slice_list,
+        sep($.slice, ','),
+        ']',
+      ),
+      seq(
+        $._expr_atom,
+        '.',
+        $.identifier,
+      ),
+      seq(
+        $._expr_atom,
+        '.',
+        '[',
+        // $.identifier_list,
+        sep1($.identifier, ','),
+        ']',
+      ),
+      seq(
+        '(',
+        // $.pattern_list,
+        sep1($.pattern, ','),
+        ')',
+      ),
+      seq(
+        '[',
+        // $.expr_list,
+        sep($._expr, ','),
+        ']',
+      ),
     ),
 
-    // TODO: field_assignment
-    // TODO: field_assignment_list
+    field_assignment: $ => seq($.identifier, '=', $._expr),
+
+    // field_assignment_list: $ => sep($.field_assignment, ','),
+
     // TODO: checked_type_constraint
 
     slice: $ => choice(
