@@ -54,7 +54,7 @@ module.exports = grammar({
       '"',
     ),
 
-    // TODO: bitvector_lit
+    bitvector_lit: $ => /\'[01 ]*\'/,
 
     bitmask_lit: $ => /\'[01x ]*\'/,
 
@@ -184,10 +184,7 @@ module.exports = grammar({
     parameter: $ => seq(
       $.identifier,
       // $.ty_opt,
-      optional(seq(
-        ':',
-        $.ty,
-      )),
+      optional(seq(':', $.ty)),
     ),
 
     // parameter_list: $ => optional(
@@ -314,10 +311,7 @@ module.exports = grammar({
 
     constraint_range_list: $ => sep1($.constraint_range, ','),
 
-    // ty_opt: $ => optional(seq(
-    //   ':',
-    //   $.ty,
-    // )),
+    // ty_opt: $ => optional(seq(':', $.ty)),
 
     // ty_list: $ => sep($.ty, ','),
 
@@ -449,7 +443,7 @@ module.exports = grammar({
       seq(
         $.identifier,
         // $.ty_opt
-        optional($.ty),
+        optional(seq(':', $.ty)),
       ),
       seq(
         '(',
@@ -457,7 +451,7 @@ module.exports = grammar({
         sep1($._decl_item, ','),
         ')',
         // $.ty_opt
-        optional($.ty),
+        optional(seq(':', $.ty)),
       ),
       seq(
         '[',
@@ -465,12 +459,12 @@ module.exports = grammar({
         sep1($._decl_item, ','),
         ']',
         // $.ty_opt
-        optional($.ty),
+        optional(seq(':', $.ty)),
       ),
       seq(
         '-',
         // $.ty_opt
-        optional($.ty),
+        optional(seq(':', $.ty)),
       ),
     ),
 
@@ -720,7 +714,7 @@ module.exports = grammar({
       $.int_lit,
       $.hex_lit,
       $.real_lit,
-      // TODO: bitvector_lit
+      $.bitvector_lit,
       $.string_lit,
       $.boolean_lit,
     ),

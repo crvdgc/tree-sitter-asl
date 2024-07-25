@@ -21,7 +21,6 @@
 
 (type_decl (ty "enumeration" (identifier) @constant))
 (ty "enumeration" (identifier) @constant)
-("UNKNOWN") @constant
 (field (identifier) @constant)
 (field_assignment (identifier) @constant)
 
@@ -53,16 +52,24 @@
 ; Literals
 
 [
+ "UNKNOWN"
+] @constant
+
+[
   (string_lit)
+  (bitvector_lit)
+  (bitmask_lit)
 ] @string
 
 [
   (int_lit)
+  (hex_lit)
+  (real_lit)
 ] @number
 
 [
   (boolean_lit)
-] @constant.builtin
+] @constant
 
 (comment) @comment
 
