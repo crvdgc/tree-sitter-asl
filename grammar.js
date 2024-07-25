@@ -25,8 +25,10 @@ module.exports = grammar({
   // Generally this means `_opt` and `_list` non-terminals.
 
   rules: {
-    // source_file: $ => $.program,
+    // source_file: $ => optional($.program),
     source_file: $ => repeat($._decl),
+
+    // program: $ => seq($._decl, repeat($._decl)),
 
     comment: $ => token(choice(
       seq('//', /[^\n]*/),

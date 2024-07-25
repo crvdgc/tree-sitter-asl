@@ -1,4 +1,9 @@
 (identifier) @variable
+(parameter (identifier) @variable.parameter)
+(formal (identifier) @variable.parameter)
+((identifier) @function.method
+ (#is-not? local))
+
 
 ; Type identifiers
 
@@ -14,6 +19,7 @@
  "bits"
  "enumeration"
  "array"
+ "record"
  "exception"
 ] @type.builtin
 
@@ -26,8 +32,7 @@
 
 ; Function
 
-(function_decl
-  (identifier) @function)
+(function_decl (identifier) @function)
 
 [
   "func"
@@ -41,13 +46,17 @@
   "let"
   "var"
   "constant"
+  "config"
   "assert"
   "type"
   "of"
   "throw"
+  "while"
+  "do"
+  "as"
 ] @keyword
 
-(ty) @type
+; (ty) @type
 
 ; Literals
 
@@ -82,6 +91,8 @@
  (binop_mul_div_shift)
  (binop_pow)
  (unop)
+ "="
+ "=>"
 ] @operator
 
 [
