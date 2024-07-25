@@ -34,7 +34,8 @@ end
   (type_decl
     (identifier)
     (ty
-      (int_lit)
+      (expr_atom
+        (int_lit))
       (ty)))
   (type_decl
     (identifier)
@@ -45,7 +46,8 @@ end
   (type_decl
     (identifier)
     (ty
-      (identifier)
+      (expr_atom
+        (identifier))
       (ty)))
   (type_decl
     (identifier)
@@ -66,10 +68,13 @@ end
       (stmt
         (decl_stmt
           (identifier)
-          (pattern
-            (int_lit))
-          (pattern
-            (boolean_lit))))
+          (expr_atom
+            (pattern
+              (expr_atom
+                (int_lit)))
+            (pattern
+              (expr_atom
+                (boolean_lit))))))
       (stmt
         (decl_stmt
           (identifier)
@@ -81,34 +86,52 @@ end
           (ty
             (identifier))))
       (stmt
-        (pattern
-          (identifier)
-          (slice
-            (int_lit))
-          (binop_comparison)
-          (identifier)
-          (slice
-            (identifier))))
+        (expr_atom
+          (pattern
+            (expr_atom
+              (expr_atom
+                (identifier))
+              (slice
+                (expr_atom
+                  (int_lit))))
+            (binop_comparison)
+            (expr_atom
+              (expr_atom
+                (identifier))
+              (slice
+                (expr_atom
+                  (identifier)))))))
       (stmt
         (decl_stmt
           (identifier)
-          (identifier)
-          (field_assignment
+          (expr_atom
             (identifier)
-            (real_lit))
-          (field_assignment
-            (identifier)
-            (real_lit))
-          (field_assignment
-            (identifier)
-            (real_lit))))
+            (field_assignment
+              (identifier)
+              (expr_atom
+                (real_lit)))
+            (field_assignment
+              (identifier)
+              (expr_atom
+                (real_lit)))
+            (field_assignment
+              (identifier)
+              (expr_atom
+                (real_lit))))))
       (stmt
-        (pattern
-          (identifier)
-          (slice
-            (identifier))
-          (binop_comparison)
-          (identifier)
-          (identifier)))
+        (expr_atom
+          (pattern
+            (expr_atom
+              (expr_atom
+                (identifier))
+              (slice
+                (expr_atom
+                  (identifier))))
+            (binop_comparison)
+            (expr_atom
+              (expr_atom
+                (identifier))
+              (identifier)))))
       (stmt
-        (int_lit)))))
+        (expr_atom
+          (int_lit))))))

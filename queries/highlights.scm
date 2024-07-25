@@ -1,9 +1,10 @@
 (identifier) @variable
 
-((identifier) @function.method
- (#is-not? local))
+(type_decl (identifier) @type)
+(expr_atom (identifier) @type "{")
 
-(function_decl) @function
+(function_decl
+  (identifier) @function)
 
 [
   "func"

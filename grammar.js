@@ -12,11 +12,11 @@ module.exports = grammar({
   ],
 
   precedences: $ => [
-    [$._expr_atom, $._expr_term],
+    [$.expr_atom, $._expr_term],
   ],
 
   conflicts: $ => [
-    [$._expr_atom],
+    [$.expr_atom],
   ],
 
   // syntax rules cannot match empty string (except the start rule)
@@ -477,7 +477,7 @@ module.exports = grammar({
 
     _l_expr: $ => choice(
       '-',
-      $._l_expr_atom,
+      $._lexpr_atom,
       seq(
         '(',
         // $._l_expr_list
@@ -488,11 +488,11 @@ module.exports = grammar({
 
     // _l_expr_list: $ => sep1($._l_expr, ','),
 
-    _l_expr_atom: $ => choice(
+    _lexpr_atom: $ => choice(
       $.identifier,
-      seq($._l_expr_atom, '.', $.identifier),
+      seq($._lexpr_atom, '.', $.identifier),
       seq(
-        $._l_expr_atom,
+        $._lexpr_atom,
         '.',
         '[',
         // $.identifier_list
@@ -501,12 +501,12 @@ module.exports = grammar({
         ),
       seq(
         '[',
-        // $._l_expr_atom_list
-        sep1($._l_expr_atom, ','),
+        // $._lexpr_atom_list
+        sep1($._lexpr_atom, ','),
         ']',
       ),
       seq(
-        $._l_expr_atom,
+        $._lexpr_atom,
         '[',
         // $.null_or_slice_list
         sep($.slice, ','),
@@ -514,7 +514,7 @@ module.exports = grammar({
       ),
     ),
 
-    // _l_expr_atom_list: sep1($._l_expr_atom, ','),
+    // _lexpr_atom_list: sep1($._lexpr_atom, ','),
 
     elsif: $ => seq(
       'elsif',
@@ -642,10 +642,10 @@ module.exports = grammar({
         ':',
         $.ty,
       ),
-      $._expr_atom,
+      $.expr_atom,
     ),
 
-    _expr_atom: $ => choice(
+    expr_atom: $ => choice(
       $.identifier,
       seq(
         $.identifier,
@@ -663,19 +663,19 @@ module.exports = grammar({
       ),
       $._literal_expr,
       seq(
-        $._expr_atom,
+        $.expr_atom,
         '[',
         // $.null_or_slice_list,
         sep($.slice, ','),
         ']',
       ),
       seq(
-        $._expr_atom,
+        $.expr_atom,
         '.',
         $.identifier,
       ),
       seq(
-        $._expr_atom,
+        $.expr_atom,
         '.',
         '[',
         // $.identifier_list,

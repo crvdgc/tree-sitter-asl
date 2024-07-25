@@ -15,4 +15,5 @@ end
     (subprogram_body
       (stmt
         (identifier)
-        (identifier)))))
+        (expr_atom
+          (identifier))))))

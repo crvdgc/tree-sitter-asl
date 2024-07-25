@@ -20,21 +20,28 @@ ASLTypingReference.t/TypingRule.Block0.asl
     (ty)
     (subprogram_body
       (stmt
-        (boolean_lit)
+        (expr_atom
+          (boolean_lit))
         (stmt
           (decl_stmt
             (identifier)
-            (int_lit)))
+            (expr_atom
+              (int_lit))))
         (stmt
           (identifier)
-          (identifier)
-          (identifier)))
+          (expr_atom
+            (identifier)
+            (expr_atom
+              (identifier)))))
       (stmt
         (decl_stmt
           (identifier)
-          (string_lit)))
+          (expr_atom
+            (string_lit))))
       (stmt
         (identifier)
-        (identifier))
+        (expr_atom
+          (identifier)))
       (stmt
-        (int_lit)))))
+        (expr_atom
+          (int_lit))))))

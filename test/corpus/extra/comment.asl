@@ -22,4 +22,5 @@ end
       (comment)
       (stmt
         (identifier)
-        (identifier)))))
+        (expr_atom
+          (identifier))))))

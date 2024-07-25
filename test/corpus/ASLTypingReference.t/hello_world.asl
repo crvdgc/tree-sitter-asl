@@ -17,6 +17,8 @@ end
     (subprogram_body
       (stmt
         (identifier)
-        (string_lit))
+        (expr_atom
+          (string_lit)))
       (stmt
-        (int_lit)))))
+        (expr_atom
+          (int_lit))))))
