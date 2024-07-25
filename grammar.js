@@ -83,8 +83,9 @@ module.exports = grammar({
 
     _decl: $ => choice(
       seq($.annotation, $._decl),
-      $.function_decl,
       $.type_decl,
+      $.storage_decl,
+      $.function_decl,
       // TODO: other decl
     ),
 
@@ -130,7 +131,51 @@ module.exports = grammar({
 
     // field_list: $ => sep($.field, ','),
 
-    // TODO: storage_decl
+    storage_decl: $ => choice(
+      seq(
+        'var',
+        $.identifier,
+        ':',
+        $.ty,
+        ';'
+      ),
+      seq(
+        'var',
+        $.identifier,
+        // $.ty_opt,
+        optional(seq(':', $.ty)),
+        '=',
+        $._expr,
+        ';'
+      ),
+      seq(
+        'let',
+        $.identifier,
+        // $.ty_opt,
+        optional(seq(':', $.ty)),
+        '=',
+        $._expr,
+        ';',
+      ),
+      seq(
+        'constant',
+        $.identifier,
+        // $.ty_opt,
+        optional(seq(':', $.ty)),
+        '=',
+        $._expr,
+        ';',
+      ),
+      seq(
+        'config',
+        $.identifier,
+        // $.ty_opt,
+        optional(seq(':', $.ty)),
+        '=',
+        $._expr,
+        ';',
+      ),
+    ),
 
     subprogram_body: $ => seq(
       'begin',
