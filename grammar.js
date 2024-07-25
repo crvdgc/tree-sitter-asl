@@ -348,7 +348,7 @@ module.exports = grammar({
     // bitfield_list: $ => sep($.bitfield, ','),
 
     stmt: $ => choice(
-      // TODO: annotation stmt
+      seq($.annotation, $.stmt),
       $.decl_stmt,
       seq(
         $._l_expr,
