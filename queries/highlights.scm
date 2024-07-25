@@ -1,12 +1,27 @@
 (identifier) @variable
 
 ; Type identifiers
+
 (type_decl (identifier) @type)
 (expr_atom (identifier) @type "{")
 
+[
+ "boolean"
+ "integer"
+ "real"
+ "string"
+ "bit"
+ "bits"
+ "enumeration"
+ "array"
+ "exception"
+] @type.builtin
+
 ; Constants
+
 (type_decl (ty "enumeration" (identifier) @constant))
 (ty "enumeration" (identifier) @constant)
+("UNKNOWN") @constant
 (field (identifier) @constant)
 (field_assignment (identifier) @constant)
 
@@ -30,6 +45,7 @@
   "assert"
   "type"
   "of"
+  "throw"
 ] @keyword
 
 (ty) @type
