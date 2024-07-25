@@ -1,3 +1,6 @@
+=====
+ASLTypingReference.t/TypingRule.BuiltinAggregateTypes.asl
+=====
 type Pair of (integer, boolean);
 
 type T of array [3] of real;
@@ -19,3 +22,93 @@ begin
 
   return 0;
 end
+
+---
+
+(source_file
+  (type_decl
+    (identifier)
+    (ty
+      (ty)
+      (ty)))
+  (type_decl
+    (identifier)
+    (ty
+      (int_lit)
+      (ty)))
+  (type_decl
+    (identifier)
+    (ty
+      (identifier)
+      (identifier)
+      (identifier)))
+  (type_decl
+    (identifier)
+    (ty
+      (identifier)
+      (ty)))
+  (type_decl
+    (identifier)
+    (ty
+      (field
+        (identifier)
+        (ty))
+      (field
+        (identifier)
+        (ty))
+      (field
+        (identifier)
+        (ty))))
+  (function_decl
+    (identifier)
+    (ty)
+    (subprogram_body
+      (stmt
+        (decl_stmt
+          (identifier)
+          (pattern
+            (int_lit))
+          (pattern
+            (boolean_lit))))
+      (stmt
+        (decl_stmt
+          (identifier)
+          (ty
+            (identifier))))
+      (stmt
+        (decl_stmt
+          (identifier)
+          (ty
+            (identifier))))
+      (stmt
+        (pattern
+          (identifier)
+          (slice
+            (int_lit))
+          (binop_comparison)
+          (identifier)
+          (slice
+            (identifier))))
+      (stmt
+        (decl_stmt
+          (identifier)
+          (identifier)
+          (field_assignment
+            (identifier)
+            (real_lit))
+          (field_assignment
+            (identifier)
+            (real_lit))
+          (field_assignment
+            (identifier)
+            (real_lit))))
+      (stmt
+        (pattern
+          (identifier)
+          (slice
+            (identifier))
+          (binop_comparison)
+          (identifier)
+          (identifier)))
+      (stmt
+        (int_lit)))))

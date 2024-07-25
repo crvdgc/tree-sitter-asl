@@ -44,8 +44,9 @@ module.exports = grammar({
 
     int_lit: $ => /[0-9][0-9_]*/,
 
-    // TODO: hex_lit
-    // TODO: real_lit
+    hex_lit: $ => /0x[0-9a-fA-F][0-9a-fA-F_]*/,
+
+    real_lit: $ => /[0-9][0-9_]*\.[0-9][0-9_]*/,
 
     string_lit: $ => seq(
       '"',
@@ -656,7 +657,9 @@ module.exports = grammar({
       seq(
         $.identifier,
         // $.field_assignment_list,
+        '{',
         sep($.field_assignment, ','),
+        '}',
       ),
       $._literal_expr,
       seq(
@@ -714,8 +717,10 @@ module.exports = grammar({
 
     _literal_expr: $ => choice(
       $.int_lit,
+      $.hex_lit,
+      $.real_lit,
+      // TODO: bitvector_lit
       $.string_lit,
-      // TODO: other literal_expr
       $.boolean_lit,
     ),
   }
