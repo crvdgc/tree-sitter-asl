@@ -15,9 +15,7 @@ module.exports = grammar({
     [$.expr_atom, $._expr_term],
   ],
 
-  conflicts: $ => [
-    [$.expr_atom],
-  ],
+  conflicts: $ => [],
 
   // syntax rules cannot match empty string (except the start rule)
   // Such rules must be manually inlined (`inlined` list doesn't handle this
