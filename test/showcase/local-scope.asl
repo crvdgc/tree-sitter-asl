@@ -7,6 +7,17 @@ type PointArray of array [Coord] of real;
 type PointRecord of record
   { x : real, y : real, z : real };
 
+func foo (x: bits(4) { [3:2] A, [1] B }) => bits(4) { [3:2] A, [1] B }
+begin
+  return x;
+end
+
+func bar{N}(x: bits(N)) => bit
+begin
+    return x[0];
+end
+
+
 func f (x : integer) => integer
 begin
   let y = x + 1;

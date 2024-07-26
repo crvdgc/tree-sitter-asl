@@ -29,6 +29,7 @@
 (ty "enumeration" (identifier) @constant)
 (field (identifier) @constant)
 (field_assignment (identifier) @constant)
+(bitfield (identifier) @constant)
 
 ; Function
 
