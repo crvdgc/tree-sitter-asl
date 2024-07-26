@@ -1,3 +1,6 @@
+=====
+ASLTypingReference.t/TypingRule.Lit.asl
+=====
 func main () => integer
 begin
   var n1 = 5; // type: integer{5}
@@ -13,3 +16,73 @@ begin
   var bv2 = ''; // type: bits(0)
   return 0;
 end
+---
+
+(source_file
+  (function_decl
+    (identifier)
+    (ty)
+    (subprogram_body
+      (stmt
+        (decl_stmt
+          (identifier)
+          (expr_atom
+            (int_lit))))
+      (comment)
+      (stmt
+        (decl_stmt
+          (identifier)
+          (expr_atom
+            (int_lit))))
+      (comment)
+      (stmt
+        (decl_stmt
+          (identifier)
+          (expr_atom
+            (hex_lit))))
+      (comment)
+      (stmt
+        (decl_stmt
+          (identifier)
+          (expr_atom
+            (boolean_lit))))
+      (comment)
+      (stmt
+        (decl_stmt
+          (identifier)
+          (expr_atom
+            (boolean_lit))))
+      (comment)
+      (stmt
+        (decl_stmt
+          (identifier)
+          (expr_atom
+            (real_lit))))
+      (comment)
+      (stmt
+        (decl_stmt
+          (identifier)
+          (expr_atom
+            (string_lit))))
+      (comment)
+      (stmt
+        (decl_stmt
+          (identifier)
+          (expr_atom
+            (string_lit))))
+      (comment)
+      (stmt
+        (decl_stmt
+          (identifier)
+          (expr_atom
+            (bitvector_lit))))
+      (comment)
+      (stmt
+        (decl_stmt
+          (identifier)
+          (expr_atom
+            (bitvector_lit))))
+      (comment)
+      (stmt
+        (expr_atom
+          (int_lit))))))
