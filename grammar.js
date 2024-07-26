@@ -13,6 +13,7 @@ module.exports = grammar({
 
   precedences: $ => [
     [$.expr_atom, $._expr_term],
+    [$._cexpr_cmp, $._cexpr],
   ],
 
   conflicts: $ => [],
@@ -613,7 +614,8 @@ module.exports = grammar({
     // TODO: direction
     // TODO: catcher
     // TODO: catcher_list
-    // TODO: expr_opt
+
+    // expr_opt: $ => optional($._expr)
 
     // expr_list: $ => sep($._expr, ','),
 
@@ -629,27 +631,40 @@ module.exports = grammar({
     // TODO: elsif_expr
     // TODO: elsif_expr_list
 
-    _cexpr: $ => prec.left(choice(
+    _cexpr: $ => choice(
       seq(
         $._cexpr,
         $.binop_boolean,
         $._cexpr_cmp
       ),
+      // NOTE: reference manual may be wrong to only place it here.
+      //
+      // Because this will allow only `binop_boolean` to connect
+      // _checked_type_constraint, preventing e.g.
+      // `x as string == x` from
+      // ASLTypingReference.t/TypingRule.TString.asl.
+      //
+      // The parser from asllib and asl-interpreter both allow arbitrary binop
+      // to occur between _checked_type_constraint.
       seq(
         $._cexpr,
         $._checked_type_constraint,
       ),
       $._cexpr_cmp,
-    )),
+    ),
 
-    _cexpr_cmp: $ => prec.left(choice(
+    _cexpr_cmp: $ => choice(
       seq(
         $._cexpr_cmp,
         $.binop_comparison,
         $._cexpr_add_sub,
       ),
+      seq(
+        $._cexpr_cmp,
+        $._checked_type_constraint,
+      ),
       $._cexpr_add_sub,
-    )),
+    ),
 
     _cexpr_add_sub: $ => choice(
       seq(
@@ -728,7 +743,7 @@ module.exports = grammar({
     ),
 
     _expr_term: $ => choice(
-      // TODO: other expr_term
+      // TODO: expr_atom binop_in pattern_set
       seq(
         'UNKNOWN',
         ':',
