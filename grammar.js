@@ -661,12 +661,27 @@ module.exports = grammar({
     // null_or_expr_list: $ => sep($.null_or_expr_list, ','),
 
     _expr: $ => choice(
-      // TODO: if then else expr
+      seq(
+        'if',
+        $._cexpr,
+        'then',
+        $._expr,
+        // $.elsif_expr_list
+        repeat($.elsif_expr),
+        'else',
+        $._expr,
+      ),
       $._cexpr,
     ),
 
-    // TODO: elsif_expr
-    // TODO: elsif_expr_list
+    elsif_expr: $ => seq(
+      'elsif',
+      $._expr,
+      'then',
+      $._expr,
+    ),
+
+    elsif_expr_list: $ => repeat($.elsif_expr),
 
     _cexpr: $ => choice(
       seq(
