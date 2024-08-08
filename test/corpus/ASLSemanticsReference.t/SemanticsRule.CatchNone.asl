@@ -1,3 +1,7 @@
+=====
+ASLSemanticsReference.t/SemanticsRule.CatchNone.asl
+:error
+=====
 type MyExceptionType1 of exception{};
 type MyExceptionType2 of exception{};
 
@@ -5,7 +9,7 @@ func main () => integer
 begin
 
   try
-     try 
+     try
        throw MyExceptionType1 {};
        assert FALSE;
      catch
@@ -13,8 +17,9 @@ begin
          assert FALSE;
      end
   catch MyExceptionType1;
-    assert TRUE; 
+    assert TRUE;
   end
 
   return 0;
 end
+---
