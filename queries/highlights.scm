@@ -55,6 +55,7 @@
   "while"
   "do"
   "as"
+  "pass"
 ] @keyword
 
 ; (ty) @type
