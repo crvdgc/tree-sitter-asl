@@ -103,6 +103,7 @@
  (binop_add_sub_logic)
  (binop_mul_div_shift)
  (binop_pow)
+ (binop_in)
  (unop)
  "="
  "=>"
