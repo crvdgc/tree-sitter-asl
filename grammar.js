@@ -449,6 +449,21 @@ module.exports = grammar({
         $._stmt_list,
         'end',
       ),
+      // TODO: repeat stmt
+      seq(
+        'try',
+        $._stmt_list,
+        'catch',
+        // $.catcher_list
+        repeat($.catcher),
+        // $.otherwise_opt
+        optional(seq(
+          'otherwise',
+          '=>',
+          $._stmt_list,
+        )),
+        'end',
+      ),
       // TODO: other stmts
     ),
 
@@ -581,7 +596,12 @@ module.exports = grammar({
     // TODO: alt
     // TODO: where_opt
     // TODO: alt_list
-    // TODO: otherwise_opt
+
+    // otherwise_opt: $ => optional(seq(
+    //   'otherwise',
+    //   '=>',
+    //   $._stmt_list,
+    // )),
 
     pattern: $ => choice(
       '-',
@@ -612,8 +632,25 @@ module.exports = grammar({
     // pattern_list: $ => sep1($.pattern, ','),
 
     // TODO: direction
-    // TODO: catcher
-    // TODO: catcher_list
+
+    catcher: $ => choice(
+      seq(
+        'when',
+        $.identifier,
+        ':',
+        $.ty,
+        '=>',
+        $._stmt_list,
+      ),
+      seq(
+        'when',
+        $.ty,
+        '=>',
+        $._stmt_list,
+      ),
+    ),
+
+    // catcher_list: $ => repeat($.catcher)
 
     // expr_opt: $ => optional($._expr)
 
