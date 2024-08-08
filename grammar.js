@@ -787,7 +787,7 @@ module.exports = grammar({
       'NOT',
     ),
 
-    // binop_in: 'IN',
+    binop_in: $ => 'IN',
 
     _bexpr: $ => choice(
       seq($.unop, $._bexpr),
@@ -795,7 +795,11 @@ module.exports = grammar({
     ),
 
     _expr_term: $ => choice(
-      // TODO: expr_atom binop_in pattern_set
+      seq(
+        $.expr_atom,
+        $.binop_in,
+        $.pattern_set,
+      ),
       seq(
         'UNKNOWN',
         ':',
