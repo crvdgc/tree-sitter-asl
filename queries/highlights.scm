@@ -36,26 +36,37 @@
 (function_decl (identifier) @function)
 
 [
+  ; func def
   "func"
   "begin"
   "end"
+
+  ; if then else
   "if"
   "then"
   "elsif"
   "else"
-  "return"
+
+  ; declaration
   "let"
   "var"
   "constant"
   "config"
-  "assert"
   "type"
   "of"
-  "throw"
+  "as"
+
+  ; statements
+  "return"
+  "assert"
   "while"
   "do"
-  "as"
   "pass"
+  "throw"
+  "try"
+  "catch"
+  "when"
+  "otherwise"
 ] @keyword
 
 ; (ty) @type
