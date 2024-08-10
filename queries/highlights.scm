@@ -67,6 +67,9 @@
   "catch"
   "when"
   "otherwise"
+  "for"
+  "to"
+  "downto"
 ] @keyword
 
 ; (ty) @type
