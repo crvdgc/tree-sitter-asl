@@ -441,7 +441,17 @@ module.exports = grammar({
         'end',
       ),
       // TODO: case stmt
-      // TODO: for stmt
+      seq(
+        'for',
+        $.identifier,
+        '=',
+        $._expr,
+        $.direction,
+        $._expr,
+        'do',
+        $._stmt_list,
+        'end',
+      ),
       seq(
         'while',
         $._expr,
@@ -631,7 +641,7 @@ module.exports = grammar({
 
     // pattern_list: $ => sep1($.pattern, ','),
 
-    // TODO: direction
+    direction: $ => choice('to', 'downto'),
 
     catcher: $ => choice(
       seq(
