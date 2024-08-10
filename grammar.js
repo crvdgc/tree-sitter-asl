@@ -482,9 +482,15 @@ module.exports = grammar({
     decl_stmt: $ => choice(
       seq(
         'var',
-        $.identifier,
-        ':',
-        $.ty,
+        // NOTE: according to the new parser, `$.identifier` is relaxed to
+        // `$._decl_item`. See
+        // `./test/corpus/ASLSemanticsReference.t/SemanticsRule.LDDiscard.asl`
+        // original {
+        // $.identifier,
+        // ':',
+        // $.ty,
+        // } original
+        $._decl_item,
         ';'
       ),
       seq(
