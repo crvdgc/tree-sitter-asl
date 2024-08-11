@@ -474,7 +474,13 @@ module.exports = grammar({
         $._stmt_list,
         'end',
       ),
-      // TODO: repeat stmt
+      seq(
+        'repeat',
+        $._stmt_list,
+        'until',
+        $._expr,
+        ';',
+      ),
       seq(
         'try',
         $._stmt_list,
@@ -489,7 +495,13 @@ module.exports = grammar({
         )),
         'end',
       ),
-      // TODO: other stmts
+      seq(
+        'pragma',
+        $.identifier,
+        // $.null_or_expr_list,
+        sep($._expr, ','),
+        ';',
+      ),
     ),
 
     _stmt_list: $ => seq($.stmt, repeat($.stmt)),
