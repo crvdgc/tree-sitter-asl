@@ -41,6 +41,8 @@
   "func"
   "begin"
   "end"
+  "getter"
+  "setter"
 
   ; if then else
   "if"
