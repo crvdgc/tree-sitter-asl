@@ -72,6 +72,8 @@
   "to"
   "downto"
   "case"
+  "repeat"
+  "until"
 ] @keyword
 
 ; (ty) @type
