@@ -570,7 +570,7 @@ module.exports = grammar({
       ),
     ),
 
-    // TODO: decl_item_list
+    // decl_item_list: $ => sep1($._decl_item, ','),
 
     _l_expr: $ => choice(
       '-',
