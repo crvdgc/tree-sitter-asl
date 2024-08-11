@@ -87,7 +87,15 @@ module.exports = grammar({
       $.type_decl,
       $.storage_decl,
       $.function_decl,
-      // TODO: other decl
+      $.getter_decl,
+      $.setter_decl,
+      seq(
+        'pragma',
+        $.identifier,
+        // $.null_or_expr_list
+        sep($._expr, ','),
+        ';'
+      ),
     ),
 
     type_decl: $ => choice(
@@ -217,9 +225,62 @@ module.exports = grammar({
     //   $.ty,
     // )),
 
-    // TODO: args_opt
-    // TODO: getter_decl
-    // TODO: setter_decl
+    // args_opt: $ => optional(seq(
+    //   '[',
+    //   // $.formal_list,
+    //   sep($.formal, ','),
+    //   ']',
+    // )),
+
+    getter_decl: $ => seq(
+      'getter',
+      $.identifier,
+      // $.parameters_opt,
+      optional(seq(
+        '{',
+        // $.parameter_list,
+        optional(
+          sep($.parameter, ','),
+        ),
+        '}',
+      )),
+      // $.args_opt,
+      optional(seq(
+        '[',
+        // $.formal_list,
+        sep($.formal, ','),
+        ']',
+      )),
+      '=>',
+      $.ty,
+      $.subprogram_body,
+    ),
+
+    setter_decl: $ => seq(
+      'setter',
+      $.identifier,
+      // $.parameters_opt,
+      optional(seq(
+        '{',
+        // $.parameter_list,
+        optional(
+          sep($.parameter, ','),
+        ),
+        '}',
+      )),
+      // $.args_opt,
+      optional(seq(
+        '[',
+        // $.formal_list,
+        sep($.formal, ','),
+        ']',
+      )),
+      '=',
+      $.identifier,
+      ':',
+      $.ty,
+      $.subprogram_body,
+    ),
 
     // parameters_opt: $ => optional(seq(
     //   '{',
