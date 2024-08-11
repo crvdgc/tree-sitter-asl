@@ -71,6 +71,7 @@
   "for"
   "to"
   "downto"
+  "case"
 ] @keyword
 
 ; (ty) @type

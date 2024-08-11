@@ -440,7 +440,22 @@ module.exports = grammar({
         optional(seq('else', $._stmt_list)),
         'end',
       ),
-      // TODO: case stmt
+      seq(
+        'case',
+        $._expr,
+        'of',
+        // $.alt_list,
+        repeat($.alt),
+        // $.otherwise_opt
+        optional(seq(
+          'otherwise',
+          // NOTE: case's otherwise ALT_DELIM is expanded to allow ':' as well
+          // See the note in `$.alt`
+          choice('=>', ':'),
+          $._stmt_list,
+        )),
+        'end',
+      ),
       seq(
         'for',
         $.identifier,
@@ -609,9 +624,22 @@ module.exports = grammar({
 
     // $.else_opt = $ => optional(seq('else', $._stmt_list)),
 
-    // TODO: alt
-    // TODO: where_opt
-    // TODO: alt_list
+    alt: $ => seq(
+      'when',
+      // $.pattern_list
+      sep1($.pattern, ','),
+      // $.where_opt,
+      optional(seq('where', $._expr)),
+      // NOTE: original parser only uses '=>',
+      // new parser's ALT_DELIM is '=>' or ':',
+      // See ./test/corpus/ASLSemanticsReference.t/SemanticsRule.SCase.asl
+      choice('=>', ':'),
+      $._stmt_list,
+    ),
+
+    // where_opt: $ => optional(seq('where', $._expr)),
+
+    // alt_list: $ => repeat($.alt),
 
     // otherwise_opt: $ => optional(seq(
     //   'otherwise',
