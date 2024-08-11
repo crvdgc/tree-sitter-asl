@@ -1,0 +1,1766 @@
+[
+  {
+    "type": "alt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binop_add_sub_logic",
+          "named": true
+        },
+        {
+          "type": "binop_boolean",
+          "named": true
+        },
+        {
+          "type": "binop_comparison",
+          "named": true
+        },
+        {
+          "type": "binop_in",
+          "named": true
+        },
+        {
+          "type": "binop_mul_div_shift",
+          "named": true
+        },
+        {
+          "type": "binop_pow",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "elsif_expr",
+          "named": true
+        },
+        {
+          "type": "expr_atom",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        },
+        {
+          "type": "pattern_set",
+          "named": true
+        },
+        {
+          "type": "stmt",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        },
+        {
+          "type": "unop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "annotation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binop_add_sub_logic",
+          "named": true
+        },
+        {
+          "type": "binop_boolean",
+          "named": true
+        },
+        {
+          "type": "binop_comparison",
+          "named": true
+        },
+        {
+          "type": "binop_in",
+          "named": true
+        },
+        {
+          "type": "binop_mul_div_shift",
+          "named": true
+        },
+        {
+          "type": "binop_pow",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "elsif_expr",
+          "named": true
+        },
+        {
+          "type": "expr_atom",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "pattern_set",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        },
+        {
+          "type": "unop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "binop_add_sub_logic",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "binop_boolean",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "binop_comparison",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "binop_mul_div_shift",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "bitfield",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bitfield",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "slice",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "bitwidth",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binop_add_sub_logic",
+          "named": true
+        },
+        {
+          "type": "binop_boolean",
+          "named": true
+        },
+        {
+          "type": "binop_comparison",
+          "named": true
+        },
+        {
+          "type": "binop_in",
+          "named": true
+        },
+        {
+          "type": "binop_mul_div_shift",
+          "named": true
+        },
+        {
+          "type": "binop_pow",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "elsif_expr",
+          "named": true
+        },
+        {
+          "type": "expr_atom",
+          "named": true
+        },
+        {
+          "type": "pattern_set",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        },
+        {
+          "type": "unop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "boolean_lit",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "catcher",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "stmt",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "constraint",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "constraint_range",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "constraint_range",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binop_add_sub_logic",
+          "named": true
+        },
+        {
+          "type": "binop_boolean",
+          "named": true
+        },
+        {
+          "type": "binop_comparison",
+          "named": true
+        },
+        {
+          "type": "binop_in",
+          "named": true
+        },
+        {
+          "type": "binop_mul_div_shift",
+          "named": true
+        },
+        {
+          "type": "binop_pow",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "elsif_expr",
+          "named": true
+        },
+        {
+          "type": "expr_atom",
+          "named": true
+        },
+        {
+          "type": "pattern_set",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        },
+        {
+          "type": "unop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "decl_stmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binop_add_sub_logic",
+          "named": true
+        },
+        {
+          "type": "binop_boolean",
+          "named": true
+        },
+        {
+          "type": "binop_comparison",
+          "named": true
+        },
+        {
+          "type": "binop_in",
+          "named": true
+        },
+        {
+          "type": "binop_mul_div_shift",
+          "named": true
+        },
+        {
+          "type": "binop_pow",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "elsif_expr",
+          "named": true
+        },
+        {
+          "type": "expr_atom",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "pattern_set",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        },
+        {
+          "type": "unop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "direction",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "elsif",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binop_add_sub_logic",
+          "named": true
+        },
+        {
+          "type": "binop_boolean",
+          "named": true
+        },
+        {
+          "type": "binop_comparison",
+          "named": true
+        },
+        {
+          "type": "binop_in",
+          "named": true
+        },
+        {
+          "type": "binop_mul_div_shift",
+          "named": true
+        },
+        {
+          "type": "binop_pow",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "elsif_expr",
+          "named": true
+        },
+        {
+          "type": "expr_atom",
+          "named": true
+        },
+        {
+          "type": "pattern_set",
+          "named": true
+        },
+        {
+          "type": "stmt",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        },
+        {
+          "type": "unop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "elsif_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binop_add_sub_logic",
+          "named": true
+        },
+        {
+          "type": "binop_boolean",
+          "named": true
+        },
+        {
+          "type": "binop_comparison",
+          "named": true
+        },
+        {
+          "type": "binop_in",
+          "named": true
+        },
+        {
+          "type": "binop_mul_div_shift",
+          "named": true
+        },
+        {
+          "type": "binop_pow",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "elsif_expr",
+          "named": true
+        },
+        {
+          "type": "expr_atom",
+          "named": true
+        },
+        {
+          "type": "pattern_set",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        },
+        {
+          "type": "unop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "expr_atom",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binop_add_sub_logic",
+          "named": true
+        },
+        {
+          "type": "binop_boolean",
+          "named": true
+        },
+        {
+          "type": "binop_comparison",
+          "named": true
+        },
+        {
+          "type": "binop_in",
+          "named": true
+        },
+        {
+          "type": "binop_mul_div_shift",
+          "named": true
+        },
+        {
+          "type": "binop_pow",
+          "named": true
+        },
+        {
+          "type": "bitvector_lit",
+          "named": true
+        },
+        {
+          "type": "boolean_lit",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "elsif_expr",
+          "named": true
+        },
+        {
+          "type": "expr_atom",
+          "named": true
+        },
+        {
+          "type": "field_assignment",
+          "named": true
+        },
+        {
+          "type": "hex_lit",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "int_lit",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        },
+        {
+          "type": "pattern_set",
+          "named": true
+        },
+        {
+          "type": "real_lit",
+          "named": true
+        },
+        {
+          "type": "slice",
+          "named": true
+        },
+        {
+          "type": "string_lit",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        },
+        {
+          "type": "unop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "field",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "field_assignment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binop_add_sub_logic",
+          "named": true
+        },
+        {
+          "type": "binop_boolean",
+          "named": true
+        },
+        {
+          "type": "binop_comparison",
+          "named": true
+        },
+        {
+          "type": "binop_in",
+          "named": true
+        },
+        {
+          "type": "binop_mul_div_shift",
+          "named": true
+        },
+        {
+          "type": "binop_pow",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "elsif_expr",
+          "named": true
+        },
+        {
+          "type": "expr_atom",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "pattern_set",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        },
+        {
+          "type": "unop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "formal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "formal",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "subprogram_body",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "getter_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "formal",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "subprogram_body",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "lexpr_atom",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "lexpr_atom",
+          "named": true
+        },
+        {
+          "type": "slice",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parameter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binop_add_sub_logic",
+          "named": true
+        },
+        {
+          "type": "binop_boolean",
+          "named": true
+        },
+        {
+          "type": "binop_comparison",
+          "named": true
+        },
+        {
+          "type": "binop_in",
+          "named": true
+        },
+        {
+          "type": "binop_mul_div_shift",
+          "named": true
+        },
+        {
+          "type": "binop_pow",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "elsif_expr",
+          "named": true
+        },
+        {
+          "type": "expr_atom",
+          "named": true
+        },
+        {
+          "type": "pattern_set",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        },
+        {
+          "type": "unop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pattern_set",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bitmask_lit",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "setter_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "formal",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "subprogram_body",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "slice",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binop_add_sub_logic",
+          "named": true
+        },
+        {
+          "type": "binop_boolean",
+          "named": true
+        },
+        {
+          "type": "binop_comparison",
+          "named": true
+        },
+        {
+          "type": "binop_in",
+          "named": true
+        },
+        {
+          "type": "binop_mul_div_shift",
+          "named": true
+        },
+        {
+          "type": "binop_pow",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "elsif_expr",
+          "named": true
+        },
+        {
+          "type": "expr_atom",
+          "named": true
+        },
+        {
+          "type": "pattern_set",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        },
+        {
+          "type": "unop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "annotation",
+          "named": true
+        },
+        {
+          "type": "binop_add_sub_logic",
+          "named": true
+        },
+        {
+          "type": "binop_boolean",
+          "named": true
+        },
+        {
+          "type": "binop_comparison",
+          "named": true
+        },
+        {
+          "type": "binop_in",
+          "named": true
+        },
+        {
+          "type": "binop_mul_div_shift",
+          "named": true
+        },
+        {
+          "type": "binop_pow",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "elsif_expr",
+          "named": true
+        },
+        {
+          "type": "expr_atom",
+          "named": true
+        },
+        {
+          "type": "function_decl",
+          "named": true
+        },
+        {
+          "type": "getter_decl",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "pattern_set",
+          "named": true
+        },
+        {
+          "type": "setter_decl",
+          "named": true
+        },
+        {
+          "type": "storage_decl",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        },
+        {
+          "type": "type_decl",
+          "named": true
+        },
+        {
+          "type": "unop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "stmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "alt",
+          "named": true
+        },
+        {
+          "type": "annotation",
+          "named": true
+        },
+        {
+          "type": "binop_add_sub_logic",
+          "named": true
+        },
+        {
+          "type": "binop_boolean",
+          "named": true
+        },
+        {
+          "type": "binop_comparison",
+          "named": true
+        },
+        {
+          "type": "binop_in",
+          "named": true
+        },
+        {
+          "type": "binop_mul_div_shift",
+          "named": true
+        },
+        {
+          "type": "binop_pow",
+          "named": true
+        },
+        {
+          "type": "catcher",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "decl_stmt",
+          "named": true
+        },
+        {
+          "type": "direction",
+          "named": true
+        },
+        {
+          "type": "elsif",
+          "named": true
+        },
+        {
+          "type": "elsif_expr",
+          "named": true
+        },
+        {
+          "type": "expr_atom",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "lexpr_atom",
+          "named": true
+        },
+        {
+          "type": "pattern_set",
+          "named": true
+        },
+        {
+          "type": "stmt",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        },
+        {
+          "type": "unop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "storage_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binop_add_sub_logic",
+          "named": true
+        },
+        {
+          "type": "binop_boolean",
+          "named": true
+        },
+        {
+          "type": "binop_comparison",
+          "named": true
+        },
+        {
+          "type": "binop_in",
+          "named": true
+        },
+        {
+          "type": "binop_mul_div_shift",
+          "named": true
+        },
+        {
+          "type": "binop_pow",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "elsif_expr",
+          "named": true
+        },
+        {
+          "type": "expr_atom",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "pattern_set",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        },
+        {
+          "type": "unop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string_lit",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "subprogram_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ty",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binop_add_sub_logic",
+          "named": true
+        },
+        {
+          "type": "binop_boolean",
+          "named": true
+        },
+        {
+          "type": "binop_comparison",
+          "named": true
+        },
+        {
+          "type": "binop_in",
+          "named": true
+        },
+        {
+          "type": "binop_mul_div_shift",
+          "named": true
+        },
+        {
+          "type": "binop_pow",
+          "named": true
+        },
+        {
+          "type": "bitfield",
+          "named": true
+        },
+        {
+          "type": "bitwidth",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "elsif_expr",
+          "named": true
+        },
+        {
+          "type": "expr_atom",
+          "named": true
+        },
+        {
+          "type": "field",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "pattern_set",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        },
+        {
+          "type": "unop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "type_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "field",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "ty",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unop",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "!",
+    "named": false
+  },
+  {
+    "type": "!=",
+    "named": false
+  },
+  {
+    "type": "\"",
+    "named": false
+  },
+  {
+    "type": "&&",
+    "named": false
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": "*:",
+    "named": false
+  },
+  {
+    "type": "+",
+    "named": false
+  },
+  {
+    "type": "+:",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": "-",
+    "named": false
+  },
+  {
+    "type": "-->",
+    "named": false
+  },
+  {
+    "type": ".",
+    "named": false
+  },
+  {
+    "type": "..",
+    "named": false
+  },
+  {
+    "type": "/",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": ";",
+    "named": false
+  },
+  {
+    "type": "<",
+    "named": false
+  },
+  {
+    "type": "<->",
+    "named": false
+  },
+  {
+    "type": "<<",
+    "named": false
+  },
+  {
+    "type": "<=",
+    "named": false
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": "==",
+    "named": false
+  },
+  {
+    "type": "=>",
+    "named": false
+  },
+  {
+    "type": ">",
+    "named": false
+  },
+  {
+    "type": ">=",
+    "named": false
+  },
+  {
+    "type": ">>",
+    "named": false
+  },
+  {
+    "type": "@",
+    "named": false
+  },
+  {
+    "type": "AND",
+    "named": false
+  },
+  {
+    "type": "DIV",
+    "named": false
+  },
+  {
+    "type": "DIVRM",
+    "named": false
+  },
+  {
+    "type": "FALSE",
+    "named": false
+  },
+  {
+    "type": "MOD",
+    "named": false
+  },
+  {
+    "type": "NOT",
+    "named": false
+  },
+  {
+    "type": "OR",
+    "named": false
+  },
+  {
+    "type": "TRUE",
+    "named": false
+  },
+  {
+    "type": "UNKNOWN",
+    "named": false
+  },
+  {
+    "type": "XOR",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "array",
+    "named": false
+  },
+  {
+    "type": "as",
+    "named": false
+  },
+  {
+    "type": "assert",
+    "named": false
+  },
+  {
+    "type": "begin",
+    "named": false
+  },
+  {
+    "type": "binop_in",
+    "named": true
+  },
+  {
+    "type": "binop_pow",
+    "named": true
+  },
+  {
+    "type": "bit",
+    "named": false
+  },
+  {
+    "type": "bitmask_lit",
+    "named": true
+  },
+  {
+    "type": "bits",
+    "named": false
+  },
+  {
+    "type": "bitvector_lit",
+    "named": true
+  },
+  {
+    "type": "boolean",
+    "named": false
+  },
+  {
+    "type": "case",
+    "named": false
+  },
+  {
+    "type": "catch",
+    "named": false
+  },
+  {
+    "type": "comment",
+    "named": true
+  },
+  {
+    "type": "config",
+    "named": false
+  },
+  {
+    "type": "constant",
+    "named": false
+  },
+  {
+    "type": "do",
+    "named": false
+  },
+  {
+    "type": "downto",
+    "named": false
+  },
+  {
+    "type": "else",
+    "named": false
+  },
+  {
+    "type": "elsif",
+    "named": false
+  },
+  {
+    "type": "end",
+    "named": false
+  },
+  {
+    "type": "enumeration",
+    "named": false
+  },
+  {
+    "type": "exception",
+    "named": false
+  },
+  {
+    "type": "for",
+    "named": false
+  },
+  {
+    "type": "func",
+    "named": false
+  },
+  {
+    "type": "getter",
+    "named": false
+  },
+  {
+    "type": "hex_lit",
+    "named": true
+  },
+  {
+    "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "if",
+    "named": false
+  },
+  {
+    "type": "int_lit",
+    "named": true
+  },
+  {
+    "type": "integer",
+    "named": false
+  },
+  {
+    "type": "let",
+    "named": false
+  },
+  {
+    "type": "of",
+    "named": false
+  },
+  {
+    "type": "otherwise",
+    "named": false
+  },
+  {
+    "type": "pass",
+    "named": false
+  },
+  {
+    "type": "pragma",
+    "named": false
+  },
+  {
+    "type": "real",
+    "named": false
+  },
+  {
+    "type": "real_lit",
+    "named": true
+  },
+  {
+    "type": "record",
+    "named": false
+  },
+  {
+    "type": "repeat",
+    "named": false
+  },
+  {
+    "type": "return",
+    "named": false
+  },
+  {
+    "type": "setter",
+    "named": false
+  },
+  {
+    "type": "string",
+    "named": false
+  },
+  {
+    "type": "subtypes",
+    "named": false
+  },
+  {
+    "type": "then",
+    "named": false
+  },
+  {
+    "type": "throw",
+    "named": false
+  },
+  {
+    "type": "to",
+    "named": false
+  },
+  {
+    "type": "try",
+    "named": false
+  },
+  {
+    "type": "type",
+    "named": false
+  },
+  {
+    "type": "until",
+    "named": false
+  },
+  {
+    "type": "var",
+    "named": false
+  },
+  {
+    "type": "when",
+    "named": false
+  },
+  {
+    "type": "where",
+    "named": false
+  },
+  {
+    "type": "while",
+    "named": false
+  },
+  {
+    "type": "with",
+    "named": false
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "||",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
+  }
+]
