@@ -3,6 +3,7 @@
 (formal (identifier) @variable.parameter)
 ((identifier) @function.method
  (#is-not? local))
+("-" @variable)
 
 
 ; Type identifiers
@@ -110,6 +111,11 @@
  (unop)
  "="
  "=>"
+ "<="
+ ">="
+ "<"
+ ">"
+ ".."
 ] @operator
 
 [
