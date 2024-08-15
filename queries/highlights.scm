@@ -35,6 +35,8 @@
 ; Function
 
 (function_decl (identifier) @function)
+(getter_decl (identifier) @function)
+(setter_decl (identifier) @function)
 
 [
   ; func def
