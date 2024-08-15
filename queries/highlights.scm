@@ -78,7 +78,7 @@
   "until"
 ] @keyword
 
-; (ty) @type
+(ty) @type
 
 ; Literals
 
