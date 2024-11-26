@@ -25,7 +25,7 @@
     "src/**"
   ],
   "author": "crvdgc <ubikium@gmail.com>",
-  "license": "BSD-3-Clause",
+  "license": "MIT",
   "dependencies": {
     "node-addon-api": "^7.1.0",
     "node-gyp-build": "^4.8.0"
