@@ -1,0 +1,9 @@
+[package]
+name = "tree-sitter-asl-highlight"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tree-sitter-cli = "0.24.4"
+tree-sitter-highlight = "0.24.4"
+tree-sitter-asl = { path = "../tree-sitter-asl" }
